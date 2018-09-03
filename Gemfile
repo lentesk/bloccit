@@ -37,6 +37,8 @@ source 'https://rubygems.org'
  gem 'jbuilder', '~> 2.5'
  
  gem 'thor', '0.19.1'
+
+ gem 'bootstrap-sass'
  
  group :development do
    gem 'listen', '~> 3.0.5'
