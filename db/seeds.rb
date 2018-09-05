@@ -13,7 +13,7 @@
    Post.create!(
  # #2
      title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph
+     body:   RandomData.random_paragraph)
    )
  end
  posts = Post.all
