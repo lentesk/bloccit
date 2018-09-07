@@ -27,4 +27,8 @@
      letters.shuffle!
      letters[0,rand(3..8)].join
    end
+
+   def self.random_value
+     numbers = rand(0.99...699.99)
+   end
  end

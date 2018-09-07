@@ -13,7 +13,7 @@
    Post.create!(
  # #2
      title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph)
+     body:   RandomData.random_paragraph
    )
  end
  posts = Post.all
@@ -28,10 +28,26 @@
    )
  end
  
- p "#{Post.count}"
- Post.find_or_create_by(title: "assignment post", body: "assignment body")
- p "#{Post.count}"
- 
+ ## Create Ads
+50.times do 
+ 	Advertisement.create!(
+
+ 		title: RandomData.random_sentence,
+ 		copy: RandomData.random_paragraph,
+ 		price: RandomData.random_value
+
+ 	)
+end 
+
+ # p "#{Post.count}"
+ # Post.find_or_create_by(title: "assignment post", body: "assignment body")
+ # p "#{Post.count}"
+
+ p "#{Advertisement.count}"
+  Advertisement.find_or_create_by(title: "ad title", copy: "ad copy")
+ p "#{Advertisement.count}"
+
  puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
+ puts "#{Advertisement.count} ads created"
