@@ -29,9 +29,13 @@
  end
  
  p "#{Post.count}"
- Post.find_or_create_by(title: "assignment post", body: "assignment body")
+ unique_post = Post.find_or_create_by(title: "assignment post", body: "assignment body")
  p "#{Post.count}"
  
+ p "#{Comment.count}"
+ Comment.find_or_create_by(post: unique_post, body: "assignment comment body")
+ p "#{Comment.count}"
+
  puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
