@@ -13,7 +13,7 @@
    Post.create!(
  # #2
      title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph)
+     body:   RandomData.random_paragraph
    )
  end
  posts = Post.all
@@ -27,11 +27,29 @@
      body: RandomData.random_paragraph
    )
  end
+
+ 50.times do
+ # #1
+   Question.create!(
+ # #2
+     title:  RandomData.random_sentence,
+     body:   RandomData.random_paragraph 
+   )
+ end
+ questions = Question.all
+
  
+
+
  p "#{Post.count}"
  Post.find_or_create_by(title: "assignment post", body: "assignment body")
  p "#{Post.count}"
+
+ p "#{Question.count}"
+ Question.find_or_create_by(title: "assignment question", body: "assignment body")
+ p "#{Question.count}"
  
  puts "Seed finished"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
+ puts "#{Question.count} questions created"
