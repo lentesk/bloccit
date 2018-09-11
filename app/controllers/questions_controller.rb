@@ -1,80 +1,55 @@
 class QuestionsController < ApplicationController
-  before_action :set_question, only: [:show, :edit, :update, :destroy]
-
-  # GET /questions
-  # GET /questions.json
   def index
     @questions = Question.all
   end
-
-  # GET /questions/1
-  # GET /questions/1.json
-  def show
+   def show
+    @question = Question.find(params[:id])
   end
-
-  # GET /questions/new
+  
   def new
     @question = Question.new
   end
-
-  # GET /questions/1/edit
-  def edit
-  end
-
-  # POST /questions
-  # POST /questions.json
+  
   def create
-
-    @question = Question.new(question_params)
+    @question = Question.new
     @question.title = params[:question][:title]
     @question.body = params[:question][:body]
-
-
-    respond_to do |format|
-      if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
-        format.json { render :show, status: :created, location: @question }
-      else
-        format.html { render :new }
-        format.json { render json: @question.errors, status: :unprocessable_entity }
-      end
+    @question.resolved = params[:question][:resolved]
+    if @question.save
+      flash[:notice] = "Question was saved successfully."
+      redirect_to @question
+    else
+      flash.now[:alert] = "There was an error saving the question. Please try again."
+      render :new
     end
   end
+   def edit
+    @question = Question.find(params[:id])
+  end
+  
+  def update
+    @question = Question.find(params[:id])
+    @question.title = params[:question][:title]
+    @question.body = params[:question][:body]
+    @question.resolved = params[:question][:resolved]
 
-  # PATCH/PUT /questions/1
-  # PATCH/PUT /questions/1.json
-   def update
-     @question = Question.find(params[:id])
-     @question.title = params[:question][:title]
-     @question.body = params[:question][:body]
- 
-     if @question.save
-       flash[:notice] = "Question was updated."
-       redirect_to @question
-     else
-       flash.now[:alert] = "There was an error saving the question. Please try again."
-       render :edit
-     end
-   end
-
-  # DELETE /questions/1
-  # DELETE /questions/1.json
+    if @question.save
+      flash[:notice] = "Question was updated."
+      redirect_to @question
+    else
+      flash.now[:alert] = "There was an error saving the question. Please try again."
+      render :edit
+    end
+  end
+  
   def destroy
-    @question.destroy
-    respond_to do |format|
-      format.html { redirect_to questions_url, notice: 'Question was successfully destroyed.' }
-      format.json { head :no_content }
+    @question = Question.find(params[:id])
+    if @question.destroy
+      flash[:notice] = "\"#{@question.title}\" was deleted successfully."
+      redirect_to questions_path
+    else
+      flash.now[:alert] = "There was an error deleting the question."
+      render :show
     end
   end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_question
-      @question = Question.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def question_params
-      params.fetch(:question, {})
-    end
 end

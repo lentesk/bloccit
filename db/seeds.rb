@@ -33,7 +33,8 @@
    Question.create!(
  # #2
      title:  RandomData.random_sentence,
-     body:   RandomData.random_paragraph 
+     body:   RandomData.random_paragraph
+     resolved: "0" 
    )
  end
  questions = Question.all
