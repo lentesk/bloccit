@@ -36,6 +36,19 @@
    )
  end
  
+  # Create SponsoredPost
+ 15.times do
+   SponsoredPost.create!(
+     title: sponsored_posts.sample,
+     body: RandomData.random_paragraph,
+     price: RandomData.random_value
+   )
+ end
+
+ sponsored_posts = SponsoredPost.all
+ 
+
+
 
  p "#{Post.count}"
  Post.find_or_create_by(title: "assignment post", body: "assignment body")
@@ -45,3 +58,4 @@
  puts "#{Topic.count} topics created"
  puts "#{Post.count} posts created"
  puts "#{Comment.count} comments created"
+ puts "#{SponsoredPost.count} comments created"
