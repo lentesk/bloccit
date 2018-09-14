@@ -39,7 +39,7 @@
   # Create SponsoredPost
  15.times do
    SponsoredPost.create!(
-     title: sponsored_posts.sample,
+     title: RandomData.random_sentence,
      body: RandomData.random_paragraph,
      price: RandomData.random_value
    )
