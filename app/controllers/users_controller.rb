@@ -10,7 +10,7 @@ class UsersController < ApplicationController
      @user.email = params[:user][:email]
      @user.password = params[:user][:password]
      @user.password_confirmation = params[:user][:password_confirmation]
-     
+
    end
 
    def create
@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
 
   def user_params
-   params.require(:user).permit(:email, :password, :password_confirmation)
+   params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
  helper_method :user_params
