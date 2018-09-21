@@ -19,7 +19,7 @@ RSpec.describe CommentsController, type: :controller do
  
      describe "DELETE destroy" do
        it "redirects the user to the sign in view" do
-         delete :destroy, params: { post_id: my_post.id, id: comment.id }
+         delete :destroy, params: { post_id: my_post.id, id: my_comment.id }
          expect(response).to redirect_to(new_session_path)
        end
      end
