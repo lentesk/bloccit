@@ -32,24 +32,20 @@ RSpec.describe User, type: :model do
        expect(user).to respond_to(:role)
      end
  
- # #2
      it "responds to admin?" do
        expect(user).to respond_to(:admin?)
      end
  
- # #3
      it "responds to member?" do
        expect(user).to respond_to(:member?)
      end
    end
 
    describe "roles" do
- # #4
      it "is member by default" do
        expect(user.role).to eql("member")
      end
  
- # #5
      context "member user" do
        it "returns true for #member?" do
          expect(user.member?).to be_truthy
@@ -60,7 +56,6 @@ RSpec.describe User, type: :model do
        end
      end
  
- # #6
      context "admin user" do
        before do
          user.admin!
@@ -114,4 +109,17 @@ RSpec.describe User, type: :model do
      end
    end
 
+  describe "#has_favorites" do
+   let(:known_user) { create(:user, email: "blochead@bloc.io") }
+
+    it "returns false if the user doesn't have favorites" do
+      expect(user.has_favorites?).to eq false
+    end
+
+    it "returns true if the user has favorites" do
+      post = build(:post, user: user)
+      user.favorites << Favorite.create!(post: post)
+      expect(user.has_favorites?).to eq true
+    end
+  end
 end
